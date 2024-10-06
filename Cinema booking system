@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class SimpleCinemaBooking {
+    public static void main(String[] args) {
+        char[][] seatingChart = {
+            {'O', 'O', 'O', 'O', 'O'},
+            {'O', 'O', 'O', 'O', 'O'},
+            {'O', 'O', 'O', 'O', 'O'},
+            {'O', 'O', 'O', 'O', 'O'},
+            {'O', 'O', 'O', 'O', 'O'}
+        };
+
+        Scanner scanner = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("Current Seating Arrangement:");
+            displaySeatingChart(seatingChart);
+            
+            System.out.print("Enter row (0-4) or -1 to exit: ");
+            int row = scanner.nextInt();
+            if (row == -1) break;
+
+            System.out.print("Enter seat (0-4): ");
+            int seat = scanner.nextInt();
+
+            if (row >= 0 && row < 5 && seat >= 0 && seat < 5) {
+                if (seatingChart[row][seat] == 'O') {
+                    seatingChart[row][seat] = 'X';
+                    System.out.println("Seat booked successfully.");
+                } else {
+                    System.out.println("Sorry, this seat is already booked.");
+                }
+            } else {
+                System.out.println("Invalid row or seat number.");
+            }
+        }
+
+        System.out.println("Final Seating Arrangement:");
+        displaySeatingChart(seatingChart);
+        scanner.close();
+    }
+
+    private static void displaySeatingChart(char[][] seatingChart) {
+        for (char[] row : seatingChart) {
+            for (char seat : row) {
+                System.out.print(seat + " ");
+            }
+            System.out.println();
+        }
+    }
+}
